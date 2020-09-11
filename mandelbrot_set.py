@@ -1,24 +1,17 @@
 from graphics import *
-import random
 import math
+import random
 
 itMax = 1024
 
-desiredSize = [512, 512] #[320, 256]
+desiredSize = [256, 256]
 
 win = GraphWin("Mandelbrot Set", desiredSize[0], 2 * int((1 + desiredSize[1]) / 2))
 
-displayArray = [[0]]
-
-while len(displayArray[0]) < win.getWidth():
-    displayArray[0].append(displayArray[0][0])
-
-while len(displayArray) < win.getHeight():
-    displayArray.append(displayArray[0])
-
 center = [-.743643135, .131825963]
 
-pom = .000014628/2
+#plus or minus. the 
+pom = .000014628/2/2
 
 portal = [[center[0] - pom, center[0] + pom], [center[1] - pom, center[1] + pom]] #[[-2,0.5],[-1.0,1.0]]
 
