@@ -27,21 +27,18 @@ px = img.load()
 def color_choice(which, X, Y):
     def rand():
         def scaled():
+            
             return int(math.floor(256 * random.random()))
         
         return (scaled(), scaled(), scaled())
 
     def from_palette():
+
         return palette[int(math.floor(len(palette) * random.random()))]
 
     def from_hsv():
-        try_again = True
-        v = random.random()
 
-        while v < random.random():
-            v = random.random()
-
-        return hsv_to_rgb(random.random(), random.random(), v)
+        return hsv_to_rgb(random.random(), random.random(), random.random())
 
     output = ()
 
