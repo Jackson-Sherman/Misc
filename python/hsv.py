@@ -2,7 +2,10 @@
 #INPUT: all are floats where 0 <= input < 1
 #INPUT: h=hue, s=saturation, v=value
 def hsv_to_rgb(h, s, v):
-
+    """
+    Converts a color from Hue Saturation and Value to RBG
+    all inputs: {h, s, v} ∈ [0, 1]
+    """
     def zero_to_one(x):
         if x < 0:
             return 0

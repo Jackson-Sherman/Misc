@@ -4,8 +4,28 @@
         <meta charset="UTF-8"/>
         <title>test-html</title>
         <link rel="stylesheet" href="test-html.css"/>
+        <script src="hsv_to_hex.js"></script>
+        <script src="test-html.js"></script>
     </head>
     <body>
+        <div id="options">
+            <button onclick="hsv(this)">click this</button>
 
+            <br/>
+
+            <label for="number?">Show numbers:</label>
+            <input onchange="hsv(this)" id="number?" type="checkbox" checked="checked"/>
+
+            <br/>
+
+            <label for="color?">Color:</label>
+            <input onchange="hsv(this)" id="color?" type="checkbox" checked="checked"/>
+            
+            <br/>
+            
+            <label for="border?">Border:</label>
+            <input onchange="hsv(this)" id="border?" type="checkbox" checked="checked"/>
+        </div>
+        <div id="cuerpo"></div>
     </body>
 </html>

@@ -1,0 +1,16 @@
+#cuerpo div {
+    padding: 2px 0px;
+}
+
+#mesa, #mesa td, #mesa th {
+    border-collapse: collapse;
+    padding: 0px;
+    margin: 0px;
+}
+
+#mesa td, #mesa th {
+    border: none;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
