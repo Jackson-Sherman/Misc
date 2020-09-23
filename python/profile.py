@@ -20,7 +20,7 @@ for x in range(len(strings)):
 
     #print(stri)
 
-img = Image.new("RGB", (116,116), "black")
+img = Image.new("RGB", (250,250), "black")
 
 px = img.load()
 
@@ -58,4 +58,5 @@ for x in range(img.size[0]):
     for y in range(img.size[1]):
         px[x, y] = color_choice(cual, x, y)
 
+img.save("canvas_profile_pic.png")
 img.show()
