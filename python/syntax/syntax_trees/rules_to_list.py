@@ -47,15 +47,41 @@ br()
 
 
 print(trees)   #"[" + not("]")*{1,} 
+trees = re.sub("\n", "", trees)
+while re.search("\s\s+", trees):
+    trees = re.sub("\s\s+", " ", trees)
+
+br()
+
+def printtree(t):
+    st = t
+    st = re.sub("\]\s+\]", "]]", st)
+    st = re.sub("\]\s+\[", "][", st)
+
+print(trees)
 thid = True
-while re.search("\[[^\]\s]+\s+([^\[\]]+\s*)+\]",trees) and thid:
-    domain = re.search("\[[^\]]+\s+([^\]]+\s*)+\]",trees).span()
-    string = re.search("\[[^\]]+\s+([^\]]+\s*)+\]",trees).string
+
+br()
+
+search_string = "\[[^\]\s]+\s+([^\[\]]+\s*)+\]"
+treecut = trees
+outtree = ""
+
+#gets rid of excess spaces
+while re.search("\]\s+[\]\[]", trees):
+    trees = re.sub("\]\s+\]", "]]", trees)
+    trees = re.sub("\]\s+\[", "][", trees)
+
+print(trees)
+
+comment = """
+while re.search(search_string, trees) and thid:
+    domain = re.search(search_string, trees).span()
+    string = re.search(search_string, trees).string
     print(string)
     tree_start_end = (trees[:domain[0]], trees[domain[1]:])
     outstring = ""
     space_not_found = True
-    for 
     while string:
         char = string[0]
         if char == " " and space_not_found:
@@ -71,7 +97,7 @@ while re.search("\[[^\]\s]+\s+([^\[\]]+\s*)+\]",trees) and thid:
     trees = tree_start_end[0] + outstring + tree_start_end[1]
 
 
-comment = """
+
 arbol = ""
 while re.search()
 for i, char in enumerate(trees):
