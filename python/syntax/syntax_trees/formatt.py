@@ -180,12 +180,14 @@ def bracket_to_dict(tree, debug_prints = False):
         tree += j + string
 
     if debug_prints: printem()
+    output = ""
     exec("output = " + tree)
     return output
 
 def parentNode(child):
     pass
 
+bracket_to_dict(tester_tree, True)
 
 to = "→"
 se = "\n"
@@ -193,7 +195,7 @@ se = "\n"
 def rules_to_list(string, char_converts, char_seperater):
     output = "out = [["
     strlist = re.split("[" + char_seperater + "]", string)
-    newlst = 
+    #newlst = 
     for x in strlist:
         if x != "":
             string += x.strip()
