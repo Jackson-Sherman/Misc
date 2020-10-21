@@ -33,7 +33,7 @@ mat_test1 = [
 ]
 
 
-def print_mat(mat, align = "center"):
+def toString(mat, align = "center"):
     """
     prints mat in an apealing way
     """
@@ -129,8 +129,10 @@ def print_mat(mat, align = "center"):
         else:
             string += "⎠"
 
-    print(string)
+    return string
 
+def print_mat(lemat, lalign="center"):
+    print(toString(lemat,lalign))
 
 def rotate(mat, how_many_times = 1):
     """
@@ -153,14 +155,70 @@ def rotate(mat, how_many_times = 1):
     
 def reflect(mat, direction = 0):
     def true_direction(dire):
-        if type(dire) == type(0) or type(dire) == type(0.5) or type(dire) == type(3 +2j):
+        if type(dire) == type(0) or type(dire) == type(0.5) or type(dire) == type(3 +2j) or type(dire) == type(True):
             if dire:
-                return 1
+                return True
             else:
-                return 0
+                return False
 
         if re.search("\s*^(0|[lLrR])",dire):
-    if direction = 
+            pass
+    if direction:
+        pass
+
+
+def multiply(matA, matB="na"):
+    def entire(row=0):
+        if row == len(matA):
+            return []
+        else:
+            def across(col=0):
+                if col == len(matB[0]):
+                    return []
+                else:
+                    def each(i=0):
+                        if i == len(matB):
+                            return 0
+                        else:
+                            return matA[row][i] * matB[i][col] + each(i + 1)
+
+                    return [each()] + across(col + 1)
+
+            return [across()] + entire(row + 1)
+
+    try:
+        if matB == "na":
+            matB = matA[1]
+            matA = matA[0]
+        return entire()
+    except:
+        print("error :( sorry")
+            
+
+test = [
+    [
+        [0,0],
+        [0,1],
+        [1,0],
+        [1,1],
+    ],
+    [
+        [0,0,1,1],
+        [0,1,0,1]
+    ],
+    [
+        [0,1,0,1],
+        [0,0,1,1]
+    ]
+]
+listy = [re.split("\n",toString(test[i])) for i in (0,1)]
+for i in range(len(listy[0])):
+    pass
+print_mat(test[0])
+print_mat(test[1])
+print_mat(multiply(test[0],test[1]))
+print_mat(multiply(test[0],test[2]))
+
 
 
 mat_out = rotate(mat_in,1)
