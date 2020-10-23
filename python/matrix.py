@@ -37,6 +37,8 @@ def toString(mat, align = "center"):
     """
     prints mat in an apealing way
     """
+    if type(mat) == type(None):
+        return None
     height = len(mat)
     width = len(mat[0])
     #makes a matrix of strings of the values of the original mat
@@ -166,8 +168,7 @@ def reflect(mat, direction = 0):
     if direction:
         pass
 
-
-def multiply(matA, matB="na"):
+def multiply(matA, matB=None):
     def entire(row=0):
         if row == len(matA):
             return []
@@ -186,38 +187,53 @@ def multiply(matA, matB="na"):
 
             return [across()] + entire(row + 1)
 
-    try:
-        if matB == "na":
-            matB = matA[1]
-            matA = matA[0]
-        return entire()
-    except:
-        print("error :( sorry")
-            
+    if matB == None:
+        matB = matA[1]
+        matA = matA[0]
 
-test = [
-    [
-        [0,0],
-        [0,1],
-        [1,0],
-        [1,1],
-    ],
-    [
-        [0,0,1,1],
-        [0,1,0,1]
-    ],
-    [
-        [0,1,0,1],
-        [0,0,1,1]
-    ]
-]
-listy = [re.split("\n",toString(test[i])) for i in (0,1)]
-for i in range(len(listy[0])):
-    pass
+    if len(matA[0]) != len(matB):
+        return None
+    return entire()
+
+def add(matA, matB=None):
+    mats = matA if matB == None else (matA, matB)
+    for i in range(1, len(mats)):
+        if len(mats[0]) != len(mats[i]) or len(mats[0][0]) != len(mats[i][0]):
+            return None
+
+    size = (len(mats[0]), len(mats[0][0]), len(mats))
+    out = []
+    for y in range(size[0]):
+        row = []
+        for x in range(size[1]):
+            elem = 0
+            for i in range(len(mats)):
+                elem += mats[i][y][x]
+            row += [elem]
+        out += [row]
+    return out
+
+
+def lrand():
+    return int(random.random() * 10)
+# test = [
+#     [
+#         [0,0],
+#         [0,1],
+#     ],
+#     [
+#         [0,0,1,1],
+#         [0,1,0,1]
+#     ]
+# ]
+test = [[[lrand() for i in (0,1,2)] for j in (0,1)] for k in (0,1)]
+
 print_mat(test[0])
+print("~")
 print_mat(test[1])
+print("~")
 print_mat(multiply(test[0],test[1]))
-print_mat(multiply(test[0],test[2]))
+print("~")
 
 
 
