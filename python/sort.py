@@ -1,6 +1,6 @@
 import random
 import time
-xlst = [random.random() for i in range(500)]
+xlst = [int(random.random()*90)+10 for i in range(4)]
 
 def insertion(lst):
     if len(lst) < 2:
@@ -34,15 +34,25 @@ def quick(lst):
     if len(lst) <= 1:
         return lst
     else:
-        check = lst[0]
-        before = []
-        after = []
-        for i in range(1,len(lst)):
-            if lst[i] <= check:
-                before += [lst[i]]
+        # check = lst[0]
+        # before = []
+        # after = []
+        def beforeAndAfter(check,xlst,b=[],a=[]):
+            if xlst:
+                if xlst[0] <= check:
+                    return beforeAndAfter(check, xlst[1:], b+[xlst[0]], a)
+                else:
+                    return beforeAndAfter(check, xlst[1:], b, a+[xlst[0]])
             else:
-                after += [lst[i]]
-        return quick(before) + [check] + quick(after)
+                return b + [check] + a
+        c = xlst[0]
+        return quick(beforeAndAfter(c,xlst))
+        # for i in range(1,len(lst)):
+        #     if lst[i] <= check:
+        #         before += [lst[i]]
+        #     else:
+        #         after += [lst[i]]
+        # return quick(before) + [check] + quick(after)
 
 print(xlst)
 print("")
@@ -60,7 +70,7 @@ print("total run time:\n\nquicksort: {}\nbubble: {}\n~  ~ ~~  ~~ ~  ~\n".format(
 scaled = [times[i]/min(times) for i in range(len(times))]
 print("proportional time:\n\nquicksort: {}\nbubble: {}\n~  ~ ~~  ~~ ~  ~\n".format(scaled[0],scaled[1]))
 
-print(quick(xlst)[0])
+print(quick(xlst))
 print(insertion(xlst)[0])
 print(bubble(xlst)[0])
 print(len(bubble(xlst)))

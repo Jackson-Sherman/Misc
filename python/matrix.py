@@ -32,7 +32,14 @@ mat_test1 = [
     [22,4444,-22,-4444,],
 ]
 
-
+def dim(mat):
+    """
+    returns a tuple of len=2 containing the dimensions of the matrix mat. (#(rows),#(cols))
+    """
+    rows = len(mat)
+    for each_row in mat:
+        assert len(each_row) == len(mat[0]), "the matrix is not a rectangle"
+    return (len(mat), len(mat[0]))
 def toString(mat, align = "center"):
     """
     prints mat in an apealing way
@@ -196,20 +203,21 @@ def multiply(matA, matB=None):
     return entire()
 
 def add(matA, matB=None):
-    mats = matA if matB == None else (matA, matB)
-    for i in range(1, len(mats)):
-        if len(mats[0]) != len(mats[i]) or len(mats[0][0]) != len(mats[i][0]):
-            return None
+    themats = (matA if matB == None else (matA, matB))
+    mats = themats
+    size = dim(mats[0])
+    for each_mat in mats:
+        assert size == dim(each_mat), "matrix dimension error"
 
-    size = (len(mats[0]), len(mats[0][0]), len(mats))
     out = []
     for y in range(size[0]):
         row = []
         for x in range(size[1]):
+                
             elem = 0
             for i in range(len(mats)):
                 elem += mats[i][y][x]
-            row += [elem]
+            row.append(elem)
         out += [row]
     return out
 
@@ -227,33 +235,40 @@ def lrand():
 #     ]
 # ]
 test = [[[lrand() for i in (0,1,2)] for j in (0,1)] for k in (0,1)]
-
 print_mat(test[0])
 print("~")
 print_mat(test[1])
 print("~")
-print_mat(multiply(test[0],test[1]))
+#print_mat(add(test[0],test[1]))
 print("~")
+print(test[0])
+a = test[0][0].pop()
+print(test[0])
+a = test[0][0].pop()
+print(test[0])
+a = test[0][0].pop()
+print(test[0])
+print("▩"*10)
 
 
 
-mat_out = rotate(mat_in,1)
+# mat_out = rotate(mat_in,1)
 
-print(mat_in)
-print(mat_out)
+# print(mat_in)
+# print(mat_out)
 
-print("\n  ~  ~~ ~~~ ~~  ~  \n")
+# print("\n  ~  ~~ ~~~ ~~  ~  \n")
 
-print_mat([[0,1]])
-print("")
-print_mat(mat_in)
-print("")
-print_mat(mat_out)
+# print_mat([[0,1]])
+# print("")
+# print_mat(mat_in)
+# print("")
+# print_mat(mat_out)
 
-print("\n  ~  ~~ ~~~ ~~  ~  \n")
+# print("\n  ~  ~~ ~~~ ~~  ~  \n")
 
-print_mat(mat_test)
-print("")
-print_mat(rotate(mat_test,-1))
-print("")
-print_mat(mat_test)
+# print_mat(mat_test)
+# print("")
+# print_mat(rotate(mat_test,-1))
+# print("")
+# print_mat(mat_test)
