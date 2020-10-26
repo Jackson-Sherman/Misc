@@ -41,9 +41,33 @@ for i in range(16):
     print("~~~~~~~~~~\n{}: {}\n{}".format(lalista[i][0], d[lalista[i]],lalista[i][1]))
 
 def draw(mat):
-    if len(mat) == 1:
-        mat += [mat[0]]
-    if len(mat[0]) == 1:
+    oldmat = mat
+    if len(mat) % 2 == 1:
+        mat += [[0 for i in range(len(mat[0]))]]
+    if len(mat[0]) % 2 == 1:
         for i in range(len(mat)):
-            mat[i] += [mat[i][0]]
-    
+            mat[i] += [0]
+    newmat = []
+    for i in range(len(mat)//2):
+        row = []
+        for j in range(len(mat[0])//2):
+            minimat = (
+                (mat[i*2+0][j*2+0], mat[i*2+0][j*2+1]),
+                (mat[i*2+1][j*2+0], mat[i*2+1][j*2+1])
+            )
+            row += [minimat]
+        newmat += [row]
+    dastring = ""
+    for eachrow in newmat:
+        for elem in eachrow:
+            dastring += d[elem]
+        if eachrow != newmat[-1]:
+            dastring += "\n"
+    mat = oldmat
+    print(dastring)
+draw([
+    [1,1,1,1],
+    [1,0,1,0],
+    [1,1,0,0],
+    [1,0,0,1]
+])

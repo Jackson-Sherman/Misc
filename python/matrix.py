@@ -239,7 +239,7 @@ print_mat(test[0])
 print("~")
 print_mat(test[1])
 print("~")
-#print_mat(add(test[0],test[1]))
+print_mat(add(test[0],test[1]))
 print("~")
 print(test[0])
 a = test[0][0].pop()
@@ -248,7 +248,8 @@ a = test[0][0].pop()
 print(test[0])
 a = test[0][0].pop()
 print(test[0])
-print("▩"*10)
+a = test[0][0].pop()
+print(test[0])
 
 
 
