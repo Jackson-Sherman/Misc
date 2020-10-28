@@ -221,6 +221,19 @@ def add(matA, matB=None):
         out += [row]
     return out
 
+def transpose(mat):
+    if mat == [] or mat == [[]]:
+        return mat
+    
+    outmat = []
+    for coli in range(len(mat[0])):
+        newrow = []
+        for rowi in range(len(mat)):
+            newrow += [mat[rowi][coli]]
+        outmat += [newrow]
+    return outmat
+
+
 
 def lrand():
     return int(random.random() * 10)
@@ -241,15 +254,7 @@ print_mat(test[1])
 print("~")
 print_mat(add(test[0],test[1]))
 print("~")
-print(test[0])
-a = test[0][0].pop()
-print(test[0])
-a = test[0][0].pop()
-print(test[0])
-a = test[0][0].pop()
-print(test[0])
-a = test[0][0].pop()
-print(test[0])
+print_mat(transpose(add(test[0],test[1])))
 
 
 
