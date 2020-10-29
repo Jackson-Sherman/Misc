@@ -136,6 +136,9 @@ class matrix:
             return [across()] + entire(row + 1)
         return matrix(entire())
 
+    def __eq__(self, other):
+        return bool(self.list == other.list)
+    
     def scalar(self, scalar):
         return matrix([[elem * scalar for elem in row] for row in self.list])
         
