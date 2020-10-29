@@ -201,21 +201,19 @@ class matrix:
     
 
 
+if __name__ == "__main__":
+    def lrand():
+        return int(random.random() * 10)
 
-
-
-def lrand():
-    return int(random.random() * 10)
-
-test = [matrix([[lrand() for i in (0,1,2)] for j in (0,1)]) for k in (0,1)]
-print(test[0])
-print("~")
-print(test[0].scalar(2))
-print("~")
-print(test[1])
-print("~")
-print(test[0] * test[1].transpose())
-print("~")
-newmat = test[1].transpose() * test[0]
-print(newmat)
-print("~")
+    test = [matrix([[lrand() for i in (0,1,2)] for j in (0,1)]) for k in (0,1)]
+    print(test[0])
+    print("~")
+    print(test[0].scalar(2))
+    print("~")
+    print(test[1])
+    print("~")
+    print(test[0] * test[1].transpose())
+    print("~")
+    newmat = test[1].transpose() * test[0]
+    print(newmat)
+    print("~")
