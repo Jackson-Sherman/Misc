@@ -4,7 +4,7 @@ import re
 
 
 class matrix:
-    def __init__(self, alist):
+    def __init__(self, alist=[[1]]):
         self.list = alist
         for each_row in self.list:
             assert len(each_row) == len(self.list[0]), "the matrix is not a rectangle"
@@ -209,12 +209,25 @@ class matrix:
                 outmat[y if y < row else y + 1][x if x < col else x + 1] = self.list[y][x]
         return matrix(outmat)
     
+    def det(self):
+        """
+        Returns the determinant as a scalar
+        """
+        assert self.dim[0] == self.dim[1], "matrix must be a square"
+
+        if self.dim == (1,1):
+            return self.list[0][0]
+        else:
+            return sum([(1 - 2*(i%2)) * self.list[0][i] * self.submatrix(0,i).det() for i in range(self.dim[1])])
+    
 
 
 if __name__ == "__main__":
     def lrand():
         return int(random.random() * 10)
-
+    unmat = matrix([[88,80,25],[96,86,26],[56,44,9]])
+    print(unmat)
+    print("determinant of above matrix: {0}".format(unmat.det()))
     test = [matrix([[lrand() for i in (0,1,2)] for j in (0,1)]) for k in (0,1)]
     print(test[0])
     print("~")
