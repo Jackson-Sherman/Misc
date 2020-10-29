@@ -184,7 +184,7 @@ class matrix:
     def printAlign(self, align="center"):
         self.align = align
 
-    def submatrix(self, col, row):
+    def submatrix(self, row, col):
         """
         returns a submatrix deleting the specified row and the column
         if either are outside of range(dim) it will not be deleted
@@ -197,6 +197,16 @@ class matrix:
                     if x != col:
                         outrow += [self.list[y][x]]
                 outmat += [outrow]
+        return matrix(outmat)
+    
+    def supermatrix(self, row, col):
+        """
+        undoes the effects of submatrix
+        """
+        outmat = [[0 for j in range(self.dim[1] + 1)] for i in range(self.dim[0] + 1)]
+        for y in range(self.dim[0]):
+            for x in range(self.dim[1]):
+                outmat[y if y < row else y + 1][x if x < col else x + 1] = self.list[y][x]
         return matrix(outmat)
     
 
@@ -217,3 +227,6 @@ if __name__ == "__main__":
     newmat = test[1].transpose() * test[0]
     print(newmat)
     print("~")
+    for y in range(newmat.dim[0]):
+        for x in range(newmat.dim[1]):
+            print("[{0}, {1}]:\n{2}\n~".format(y,x,newmat.submatrix(y,x).supermatrix(y,x)))
