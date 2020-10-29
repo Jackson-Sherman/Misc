@@ -142,7 +142,6 @@ class matrix:
     def scalar(self, scalar):
         return matrix([[elem * scalar for elem in row] for row in self.list])
         
-
     def transpose(self):
         """
         transposes the matrix
@@ -185,6 +184,21 @@ class matrix:
     def printAlign(self, align="center"):
         self.align = align
 
+    def submatrix(self, col, row):
+        """
+        returns a submatrix deleting the specified row and the column
+        if either are outside of range(dim) it will not be deleted
+        """
+        outmat = []
+        for y in range(self.dim[0]):
+            if y != row:
+                outrow = []
+                for x in range(self.dim[1]):
+                    if x != col:
+                        outrow += [self.list[y][x]]
+                outmat += [outrow]
+        return matrix(outmat)
+    
 
 
 
@@ -202,4 +216,6 @@ print(test[1])
 print("~")
 print(test[0] * test[1].transpose())
 print("~")
-print(test[1].transpose() * test[0])
+newmat = test[1].transpose() * test[0]
+print(newmat)
+print("~")
