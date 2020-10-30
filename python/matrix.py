@@ -220,6 +220,10 @@ class matrix:
         else:
             return sum([(1 - 2*(i%2)) * self.list[0][i] * self.submatrix(0,i).det() for i in range(self.dim[1])])
     
+    def identity(self,dimension):
+        self.__init__([[1 if x==y else 0 for x in range(dimension)] for y in range(dimension)])
+        return self
+    
 
 
 if __name__ == "__main__":
@@ -240,6 +244,4 @@ if __name__ == "__main__":
     newmat = test[1].transpose() * test[0]
     print(newmat)
     print("~")
-    for y in range(newmat.dim[0]):
-        for x in range(newmat.dim[1]):
-            print("[{0}, {1}]:\n{2}\n~".format(y,x,newmat.submatrix(y,x).supermatrix(y,x)))
+    print(matrix().identity(5))
