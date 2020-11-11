@@ -3,7 +3,7 @@ from math import floor
 import re
 
 
-class matrix:
+class Matrix:
     def __init__(self, alist=[[1]]):
         self.list = alist
         for each_row in self.list:
@@ -118,7 +118,7 @@ class matrix:
                 row.append(self.list[y][x] + other.list[y][x])
             out += [row]
         
-        return matrix(out)
+        return Matrix(out)
     
     def __mul__(self, other):
         assert self.dim[1] == other.dim[0], "width of first matrix is different from the height of the second"
@@ -134,13 +134,13 @@ class matrix:
             if row == self.dim[0]:
                 return []
             return [across()] + entire(row + 1)
-        return matrix(entire())
+        return Matrix(entire())
 
     def __eq__(self, other):
         return bool(self.list == other.list)
     
     def scalar(self, scalar):
-        return matrix([[elem * scalar for elem in row] for row in self.list])
+        return Matrix([[elem * scalar for elem in row] for row in self.list])
         
     def transpose(self):
         """
@@ -153,7 +153,7 @@ class matrix:
                 for rowi in range(self.dim[0]):
                     newrow += [self.list[rowi][coli]]
                 outmat += [newrow]
-            return matrix(outmat)
+            return Matrix(outmat)
 
     def rotate(self, how_many_times = 1):
         """
@@ -173,7 +173,7 @@ class matrix:
                     row += [matter[j][i]]
                 new_mat += [row]
             matter = new_mat
-        return matrix(matter)
+        return Matrix(matter)
     
     def reflectVert(self):
         return self.rotate(-1).transpose()
@@ -197,7 +197,7 @@ class matrix:
                     if x != col:
                         outrow += [self.list[y][x]]
                 outmat += [outrow]
-        return matrix(outmat)
+        return Matrix(outmat)
     
     def supermatrix(self, row, col):
         """
@@ -207,7 +207,7 @@ class matrix:
         for y in range(self.dim[0]):
             for x in range(self.dim[1]):
                 outmat[y if y < row else y + 1][x if x < col else x + 1] = self.list[y][x]
-        return matrix(outmat)
+        return Matrix(outmat)
     
     def det(self):
         """
@@ -229,10 +229,10 @@ class matrix:
 if __name__ == "__main__":
     def lrand():
         return int(random.random() * 10)
-    unmat = matrix([[88,80,25],[96,86,26],[56,44,9]])
+    unmat = Matrix([[88,80,25],[96,86,26],[56,44,9]])
     print(unmat)
     print("determinant of above matrix: {0}".format(unmat.det()))
-    test = [matrix([[lrand() for i in (0,1,2)] for j in (0,1)]) for k in (0,1)]
+    test = [Matrix([[lrand() for i in (0,1,2)] for j in (0,1)]) for k in (0,1)]
     print(test[0])
     print("~")
     print(test[0].scalar(2))
@@ -244,4 +244,4 @@ if __name__ == "__main__":
     newmat = test[1].transpose() * test[0]
     print(newmat)
     print("~")
-    print(matrix().identity(5))
+    print(Matrix().identity(5))
