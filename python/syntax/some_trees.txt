@@ -1,0 +1,113 @@
+[NP 
+    [D a] 
+    [N' 
+        [N student] 
+        [PP [P' 
+                [P of] 
+                [NP [N' 
+                        [AP [A' [A high] ] ] 
+                        [N' 
+                            [AP [A' [A moral] ] ] 
+                            [N' [N principles] ] 
+                        ] 
+                ] ] 
+        ] ] 
+    ] 
+] 
+
+[NP 
+    [D a] 
+    [N' 
+        [N' [N student] ] 
+        [PP [P' 
+                [P of] 
+                [NP [N' 
+                        [AP [A' [A high] ] ] 
+                        [N' 
+                            [AP [A' [A moral] ] ] 
+                            [N' [N principles] ] 
+                        ] 
+                ] ] 
+        ] ] 
+    ] 
+] 
+
+
+[NP 
+    [D a] 
+    [N’ 
+        [N container]
+        [PP 
+            [P’ 
+                [P of]
+                [NP [N’ [N flour] ] ] 
+            ] 
+        ] 
+    ] 
+] 
+
+
+[NP 
+    [D a] 
+    [N' 
+        [N' 
+            [N container] 
+        ] 
+        [PP 
+            [P' 
+                [P with] 
+                [NP 
+                    [D a] 
+                    [N' 
+                        [N lid]
+                        [PP 
+                            [P'
+                                [P of]
+                                [NP [N' [N glass] ] ] 
+                            ] 
+                        ] 
+                    ] 
+                ] 
+            ] 
+        ] 
+    ] 
+] 
+
+
+[NP 
+    [D a] 
+    [N' 
+        [N' [N language] ] 
+        [PP 
+            [P' 
+                [P with] 
+                [NP 
+                    [N' 
+                        [AP [A' [A complicated] ] ] 
+                        [N' [N syntax] ] 
+                    ] 
+                ] 
+            ] 
+        ] 
+    ] 
+] 
+
+[NP 
+    [D the] 
+    [N' 
+        [N' 
+            [N collection] 
+            [PP [P' 
+                    [P of] 
+                    [NP [N' [N figurines] ] ] 
+            ] ] 
+        ] 
+        [PP [P' 
+                [P in] 
+                [NP 
+                    [D the] 
+                    [N' [N window] ] 
+                ] 
+        ] ] 
+    ] 
+] 

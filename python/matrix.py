@@ -12,6 +12,14 @@ class Matrix:
         self.align = "center"
         self.dim = (len(self.list), len(self.list[0]))
 
+    def getList(self):
+        return self.list
+
+    def setList(self, alist=[[1]]):
+        for each_row in alist[1:]:
+            assert len(each_row) == len(alist[0]), "the matrix is not a rectangle"
+        self.list = alist
+
     def __str__(self):
         """
         makes a string of self.list in an apealing way
