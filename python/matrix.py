@@ -144,6 +144,21 @@ class Matrix:
             return [across()] + entire(row + 1)
         return Matrix(entire())
 
+    def __pow__(self, other):
+        assert isinstance(other, int) and 0 <= other, "other must be type int and 0 <= other"
+        output = []
+        if other == 0:
+            output = [[(1 if ri == ci else 0) for ci in range(self.dim[1])] for ri in range(self.dim[0])]
+            return Matrix(output)
+        elif other == 1:
+            output = self.getList()
+            return Matrix(output)
+        else:
+            output = Matrix(self.getList())
+            for _ in range(1, other):
+                output = output * self
+            return output
+
     def __eq__(self, other):
         return bool(self.list == other.list)
     
