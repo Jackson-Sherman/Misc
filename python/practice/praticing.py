@@ -12,3 +12,9 @@ graph = Matrix([
 ])
 
 print(graph)
+print("\t that graph squared is:")
+square = graph ** 2
+print(square)
+print("\t that graph squared is:")
+square = square ** 2
+print(square)
