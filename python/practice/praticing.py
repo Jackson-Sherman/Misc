@@ -1,7 +1,7 @@
 import numpy as np
 
 import sys
-sys.path.insert(1,"/Users/jacksonsherman/VSC/Misc/python")
+sys.path.insert(1,"/Users/jacksonsherman/VSC/Misc/python/modules")
 from matrix import Matrix
 
 graph = Matrix([
