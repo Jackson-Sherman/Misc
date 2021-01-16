@@ -1,6 +1,9 @@
 import sqlite3 as sql
 import random
 import math
+import sys
+sys.path.append('/Users/jacksonsherman/VSC/Misc')
+from python.modules.abstract_data import Queue, Stack
 connection = sql.connect("python/survivor/survivor.db")
 c = connection.cursor()
 
@@ -91,7 +94,8 @@ mandel((" ",
 ))
 mandel(' .+*#')
 c.execute("DROP TABLE IF EXISTS test")
-c.execute("CREATE TABLE test(name TEXT, season INTEGER)")
+heads = ('name', 'season')
+c.execute("CREATE TABLE test({0} TEXT, {1} INTEGER)".format(*heads))
 rows = (
     ("Alice",1),
     ("Bob  ",1),
@@ -115,7 +119,21 @@ for row in rows:
 
 connection.commit()
 
-run("SELECT * FROM test")
+def toPy(headers,entries):
+    output = []
+    for row in entries:
+        d = dict()
+        for h,r in zip(headers,row):
+            d[h] = r.strip() if isinstance(r, str) else r
+        output.append(d)
+    return output
+
+x = toPy(heads,rows)
+
+for each in x:
+    print(each)
+
+run("SELECT name, season FROM test ORDER BY season, name")
 
 run("""SELECT season FROM test WHERE name = '{0}'""".format(*rows[0]))
 
@@ -135,7 +153,85 @@ FROM test
 WHERE season IN (SELECT season FROM test WHERE name = '{0}')
 """, *rows[0])
 
-c.execute("DROP TABLE IF EXISTS")
+run('''
+WITH RECURSIVE
+    pairs(n1, n2, s) AS (
+        SELECT name, NULL, season FROM test
+        UNION ALL
+        SELECT n1, name, s 
+            FROM pairs JOIN test ON s = season AND n1 <> name
+    )
+SELECT * FROM pairs WHERE n2 ORDER BY s, n1, n2
+'''[:0])
+
+execute("""
+DROP TABLE IF EXISTS edges;
+CREATE TABLE edges (name1 TEXT, name2 TEXT, season INTEGER);
+WITH initial(n,s) AS (SELECT name, season FROM test)
+INSERT INTO edges SELECT n, name, s FROM initial JOIN test ON n <> name AND s = season WHERE (name, n, s) NOT IN edges ORDER BY s, n, name
+""")
+connection.commit()
+
+run('SELECT * FROM edges')
+
+run('''
+WITH RECURSIVE nodes(x) AS (
+   SELECT 'Alice'
+   UNION
+   SELECT name2 FROM edges JOIN nodes ON name1=x
+)
+SELECT x FROM nodes;
+''')
+
+# total = []
+# di = {}
+# k = 0
+# for a in (0,1,2):
+#     for b in (0,1,2):
+#         for c in (0,1,2):
+#             for d in (0,1,2):
+#                 for e in (0,1,2):
+#                     for f in (0,1,2):
+#                         for g in (0,1,2):
+#                             for h in (0,1,2):
+#                                 for i in (0,1,2):
+#                                     print(str(a)+str(b)+str(c)+str(d)+str(e)+str(f)+str(g)+str(h)+str(i))
+#                                     k += 1
+#                                     also = [0,0,0]
+#                                     also[a] += 1
+#                                     also[b] += 1
+#                                     also[c] += 1
+#                                     also[d] += 1
+#                                     also[e] += 1
+#                                     also[f] += 1
+#                                     also[g] += 1
+#                                     also[h] += 1
+#                                     also[i] += 1
+#                                     if also[0] < also[1]:
+#                                         also[0], also[1] = also[1], also[0]
+#                                     if also[1] < also[2]:
+#                                         also[1], also[2] = also[2], also[1]
+#                                     if also[0] < also[1]:
+#                                         also[0], also[1] = also[1], also[0]
+#                                     also = tuple(also)
+#                                     total += [also]
+#                                     if also not in di:
+#                                         di[also] = 0
+#                                     di[also] += 1
+
+# for k,v in di.items():
+#     print('{}-{}-{}: {:>4}: {:%}'.format(*k, v, v/len(total)))
+
+# m = list(di.items())
+# for i in range(len(m)-1):
+#     for j in range(i+1, len(m)):
+#         if m[i][1] > m[j][1]:
+#             m[i], m[j] = m[j], m[i]
+# print('\n===================\n')
+# for k,v in m:
+#     print('{}-{}-{}: {:>4}: {:%}'.format(*k, v, v/len(total)))
+
+# run("SELECT * FROM ")
 
 # run('''
 # WITH RECURSIVE
