@@ -98,40 +98,26 @@ heads = ('name', 'season')
 c.execute("CREATE TABLE test({0} TEXT, {1} INTEGER)".format(*heads))
 rows = (
     ("Alice",1),
-    ("Bob  ",1),
+    ("Bob--",1),
     ("Cindy",1),
-    ("Dave ",1),
-    ("Emma ",2),
-    ("Fred ",2),
-    ("Gail ",2),
+    ("Dave-",1),
+    ("Emma-",2),
+    ("Fred-",2),
+    ("Gail-",2),
     ("Helen",2),
     ("Alice",3),
     ("Cindy",3),
-    ("Emma ",3),
+    ("Emma-",3),
     ("Helen",3),
-    ("Ian  ",4),
+    ("Ian--",4),
     ("J'tia",4),
-    ("Emma ",4),
-    ("Mike ",5)
+    ("Emma-",4),
+    ("Mike-",5)
 )
 for row in rows:
     c.execute('INSERT INTO test VALUES("{0}",{1})'.format(*row))
 
 connection.commit()
-
-def toPy(headers,entries):
-    output = []
-    for row in entries:
-        d = dict()
-        for h,r in zip(headers,row):
-            d[h] = r.strip() if isinstance(r, str) else r
-        output.append(d)
-    return output
-
-x = toPy(heads,rows)
-
-for each in x:
-    print(each)
 
 run("SELECT name, season FROM test ORDER BY season, name")
 
@@ -182,6 +168,251 @@ WITH RECURSIVE nodes(x) AS (
 )
 SELECT x FROM nodes;
 ''')
+
+def sortby(lista,dic):
+    dic = dict(dic)
+    lista = list(lista)
+    for i in range(len(lista) - 1):
+        for j in range(i+1,len(lista)):
+            if dic[lista[i]] > dic[lista[j]]:
+                lista[i], lista[j] = lista[j], lista[i]
+    return lista
+
+class Pytable:
+    def __init__(self, *headers):
+        '''
+        Creates table with the column names given
+        '''
+        self.headers = tuple([each for each in headers])
+        self.data = []
+    
+    def insert_one(self, row, *args):
+        if args:
+            vals = tuple([row] + [each for each in args])
+        else:
+            try:
+                vals = tuple(row)
+            except:
+                vals = tuple(row,)
+
+        self.data.append(vals)
+
+    def insert_many(self, rows, *args):
+        if args:
+            self.insert_one(rows)
+            for each in args:
+                self.insert_one(each)
+        else:
+            for each in rows:
+                self.insert_one(each)
+
+def toPy(headers,entries):
+    output = []
+    for row in entries:
+        d = dict()
+        for h,r in zip(headers,row):
+            d[h] = r#.strip() if isinstance(r, str) else r
+        output.append(d)
+    return output
+
+x = toPy(heads,rows)
+
+for each in x:
+    print(each)
+
+def index(lista, entry):
+    for i in range(len(lista)):
+        if lista[i][0] == entry:
+            return i
+    return -1
+
+def dijkstra(graph, source):
+    Q = [] # vertex set
+
+    parent = {}
+    depth = {}
+    original_order = {}
+    for each in graph:
+        parent[each] = None
+        depth[each] = float('inf')
+        if original_order:
+            prev = original_order.popitem()
+            original_order[prev[0]] = prev[1]
+            original_order[each] = prev[1] + 1
+        else:
+            original_order[each] = 0
+        Q.append(each)
+    depth[source] = 0
+    while Q: # is not empty
+        u = Q[0] # u is the vertex in Q with the minimum depth from the source
+        for v in Q:
+            if depth[v] < depth[u]:
+                u = v
+        Q.remove(u)
+
+        try:
+            similarity = lambda tup: None if len(u) != len(tup) else sum([1 if u[i] == tup[i] else 0 for i in range(len(u))])/len(u)
+        except:
+            similarity = lambda val: 1 if u == val else 0
+
+        for v in Q:
+            if 0 < similarity(v):
+                alt = depth[u] + 1
+                if alt < depth[v]:
+                    depth[v] = alt
+                    parent[v] = u
+    
+    def childs(g, v={}):
+        if g:
+            daughter, mother = g.popitem()
+            if mother not in v:
+                v[mother] = set()
+            v[mother].add(daughter)
+            return childs(g,v)
+        else:
+            return v
+
+    children = childs(parent.copy())
+
+    return depth, parent, children, original_order
+
+d,p,c,order = dijkstra(rows,rows[0])
+print()
+children = c.copy()
+for mom in children:
+    samename, differentname = [], []
+    while children[mom]:
+        daughter = children[mom].pop()
+        try:
+            b = bool(daughter[0] == mom[0])
+        except:
+            try:
+                b = bool(daughter[0] == mom)
+            except:
+                try:
+                    b = bool(daughter == mom[0])
+                except:
+                    b = bool(daughter == mom)
+        if b:
+            i = 0
+            if samename:
+                cont = True
+                while i<len(samename) and cont:
+                    if order[daughter] < order[samename[i]]:
+                        cont = False
+                        samename = samename[:i] + [daughter] + samename[i:]
+                    i += 1
+                if cont:
+                    samename.append(daughter)
+            else:
+                samename = [daughter]
+        else:
+            i = 0
+            if differentname:
+                cont = True
+                while i<len(differentname) and cont:
+                    if order[daughter] < order[differentname[i]]:
+                        cont = False
+                        differentname = differentname[:i] + [daughter] + differentname[i:]
+                    i += 1
+                if cont:
+                    differentname.append(daughter)
+            else:
+                differentname = [daughter]
+    children[mom] = samename + differentname
+for each in children:
+    print(str(each)+': '+str(children[each]))
+
+for row in rows:
+    if row in children:
+        dad,sons = row,children[row]
+        first = True
+        for son in sons:
+            if first:
+                first = False
+                print('\n    {:12}: {}'.format(str(dad),str(son)))
+            else:
+                print('    |'+' '*13+str(son))
+
+print()
+
+def present(hijos):
+    s = Stack()
+    def tostr(row):
+        if isinstance(row,None):
+            return None
+        elif len(row) > 1:
+            return str(row[0]) + tostr(row[1:])
+        elif row:
+            return str(row[0])
+        else:
+            return ''
+    s.push((rows[0],0))
+    output = []
+    visited = set()
+    while not s.empty():
+        current, level = s.pop()
+        output.append((current,level))
+        visited |= {current}
+        print('tostr(current))
+
+present(children)
+
+print()
+for entry in rows:
+    ri = order[entry]
+    pa = p[entry]
+    de = d[entry]
+    print(('{:>2}{:^14}comes from{:^14}after{:^5}steps').format(str(ri),str(entry),str(pa),str(de)))
+print()
+
+
+
+def connections(todo,name):
+    unvisited = todo
+    visited = []
+    q = Stack()
+    for char in name:
+        if char != '-':
+            print(char, end='')
+    print()
+    for each in todo[::-1]:
+        if each['name'] == name:
+            q.push((each,1))
+    while not q.empty():
+        # print("\n" + "="*9 + "\n")
+        # print("q: {0}\nv: {1}\nu: {2}".format(q, visited, unvisited))
+        now = q.pop()
+        current = now[0]
+        level = now[1]
+        s = " | "*level
+        if level % 2 == 1:
+            s = s[:-2]
+            s += "+----" + str(current['season'])
+        else:
+            s = s[:-2]
+            s += '+-' + current['name'] + '-' + str(current['season'])
+        print(s)
+        if current in unvisited:
+            visited.append(now)
+            unvisited.remove(current)
+            if level % 2 == 1:
+                hijos = [row for row in todo if row['season'] == current['season']]
+                for kid in hijos:
+                    if kid != current and kid in unvisited:
+                        q.push((kid, level + 1))
+            else:
+                hijos = [row for row in todo if row['name'] == current['name']]
+                for kid in hijos:
+                    ind = index(visited,kid)
+                    if kid != current and kid in unvisited:
+                        q.push((kid, level + 1))
+                    elif -1 < ind and kid not in unvisited and level + 1 < visited[ind][1]:
+                        visited = visited[:ind] + visited[ind+1:]
+        
+    return visited
+v = x[0]
+connections(x,v['name'])
 
 # total = []
 # di = {}
