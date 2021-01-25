@@ -1,77 +1,76 @@
 import math
-class Bin:
-    def __init__(self, val):
-        if isinstance(val, str):
-            if val[0] == "-":
-                self.neg == True
-            self.v = val
+class Base:
+    s2n = {}
+    n2s = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_'
+    for i,j in enumerate(n2s):
+        s2n[j] = i
+    def __init__(self, value, base):
+        assert base < 65, 'Base too large, sorry :('
+        self.base = base
+        value = str(value)
+        self.l = len(value)
+        if '.' in value:
+            i = value.index('.')
+            self.v = value[:i]+value[i+1:]
+            self.d = i
+            self.l -= 1
         else:
-            self.v = ""
-            if val < 0:
-                self.neg = True
-                val *= -1
+            self.v = value
+            self.d = self.l
+
+    def __add__(self,other):
+        sd, sl, sv = self.d, self.l, self.v
+        od, ol, ov = other.d, other.l, other.v
+        while sd < od:
+            sd += 1
+            sl += 1
+            sv = '0' + sv
+        while od < sd:
+            od += 1
+            ol += 1
+            ov = '0' + ov
+        while sl < ol:
+            sl += 1
+            sv += '0'
+        while ol < sl:
+            ol += 1
+            ov += '0'
+        ol,od,sl,sd = ol+1,od+1,sl+1,sd+1
+        ov = '0' + ov
+        sv = '0' + sv
+
+        def adding(x,y,l,c=False):
+            if 0 < l:
+                val = self.s2n[x[l-1]]+ self.s2n[y[l-1]] + (1 if c else 0)
+                new_c = False
+                if val >= self.base:
+                    val -= self.base
+                    new_c = True
+                return adding(x,y,l-1,new_c) + self.n2s[val]
             else:
-                self.neg = False
+                return ''
+        
+        kv = adding(sv,ov,sl)
+        kd = sd
+        kl = sl
 
-            if isinstance(val, float):
-                self.frac = val - int(val)
-                val = int(val)
-            elif isinstance(val, int):
-                self.frac = 0.0
-            
-            x = 31
-            while 0 < val:
-                if val < 2**x:
-                    self.v += "0"
-                else:
-                    self.v += "1"
-                    val -= 2**x
-                x -= 1
-            self.v += "0"*(x+1)
-
-    def get_bit(self, index):
-        return int(self.v[31-index])
-    
-    def set_bit(self, index, value):
-        self.v = self.v[:31-index] + str(value) + self.v[32-index:]
-    
-    def __add__(self, other):
-        i = 0
-        c = 0
-        out = Bin(0)
-        while i < 32:
-            bits = (self.get_bit(i), other.get_bit(i), c)
-            if bits == (0,0,0):
-                out.set_bit(i,0)
-                c = 0
-            
-            elif bits == (0,0,1) or bits == (0,1,0) or bits == (1,0,0):
-                out.set_bit(i,1)
-                c = 0
-
-            elif bits == (1,1,0) or bits == (1,0,1) or bits == (0,1,1):
-                out.set_bit(i,0)
-                c = 1
-
-            elif bits == (1,1,1):
-                out.set_bit(i,1)
-                c = 1
-            i += 1
-        return out
+        while kv[0] == '0':
+            kv = kv[1:]
+            kl -= 1
+            kd -= 1
+        while kv[kl-1] == '0':
+            kv = kv[:-1]
+            kl -= 1
+        if kd < kl:
+            kv = kv[:d] + '.' + kv[d:]
+        return Base(kv, self.base)
 
     def __str__(self):
-        s = self.v
-        if s != "0"*32:
-            while s[0] == "0":
-                s = s[1:]
-        else:
-            s = "0"
-        if self.neg:
-            s = "-" + s
-        return s
+        return self.v[:self.d] + ('.' if self.d < self.l else '') + self.v[self.d:] + '_' + str(self.base)
+
 
 if __name__ == "__main__":
-    x = Bin(4)
-    y = Bin(4)
+    x = Base(15,6)
+    y = Base(44,6)
     z = x+y
     print(z)
