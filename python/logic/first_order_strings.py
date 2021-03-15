@@ -1,5 +1,5 @@
 import re
-from testing import Logic
+from python.logic.testing import Logic
 
 def collect():
     seto = set()

@@ -200,17 +200,21 @@ def draw(lam,n,funs):
         print('| {:>13} | {} |'.format(k,Logic(v)))
         print('+---------------+---+')
 
-if __name__ == "__main__":
+def loop():
     s = input("\n"+"*"*30+"\nProposition to evaluate:\n\n\t")
     print()
-    while s:
+
+    if s:
         s = alter(s)
         v = varParse(s)
         va = ""
-        for cada in v:
-            va += "," + cada
+        for cada in v: va += "," + cada
         va = va[1:]
         functions = [eval("lambda " + va + ":" + string) for string in s]
         draw(functions,v,s)
-        s = input("\n"+"*"*30+"\nProposition to evaluate:\n\n\t")
-        print()
+        
+        loop()
+
+
+
+if __name__ == "__main__": loop()
