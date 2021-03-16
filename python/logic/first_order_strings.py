@@ -1,5 +1,5 @@
 import re
-from python.logic.testing import Logic
+from c241 import Logic
 
 def collect():
     seto = set()
@@ -15,12 +15,12 @@ def collect():
 print()
 
 models = (
-    {'proof', 'valid', 'bug', 'set'},
-    {'proof', 'valid', 'logic', 'set', 'not'},
-    {'proof', 'valid', 'logic', 'pun', 'not'},
-    {'proof', 'valid', 'logic', 'set', 'program'},
-    {'proof', 'valid', 'logic', 'not', 'program'},
-    {'proof', 'logic', 'not', 'program'}
+    ('proof', 'valid', 'bug', 'set'),
+    ('proof', 'valid', 'logic', 'set', 'not'),
+    ('proof', 'valid', 'logic', 'pun', 'not'),
+    ('proof', 'valid', 'logic', 'set', 'program'),
+    ('proof', 'valid', 'logic', 'not', 'program'),
+    ('proof', 'logic', 'not', 'program'),
 )
 
 def prep(s):
@@ -61,37 +61,45 @@ class Quant:
 
     def Ex(fun, gx):
         if len(gx) == 0: return False
-        elif fun(gx.pop()): return True
-        else: return Quant.Ex(fun,gx)
+        word = gx.pop()
+        gx.add(word)
+        if fun(word): return True
+        return Quant.Ex(fun, gx - {word})
 
     def Ax(fun, gx):
         if len(gx) == 0: return True
-        elif not fun(gx.pop()): return False
-        else: return Quant.Ax(fun,gx)
+        word = gx.pop()
+        gx.add(word)
+        if not fun(word): return False
+        return Quant.Ax(fun, gx - {word})
 
     def ExEy(fun, gx):
         if len(gx) == 0: return False
         word = gx.pop()
-        if Quant.Ex((lambda t: fun(t,word)), gx | {word}): return True
-        else: return Quant.ExEy(fun,gx)
+        gx.add(word)
+        if Quant.Ex((lambda t: fun(t,word)), gx): return True
+        return Quant.ExEy(fun, gx - {word})
 
     def ExAy(fun, gx):
         if len(gx) == 0: return True
         word = gx.pop()
-        if Quant.Ex((lambda t: fun(t,word)), gx | {word}): return False
-        else: return Quant.ExAy(fun,gx)
+        gx.add(word)
+        if Quant.Ex((lambda t: fun(t,word)), gx): return False
+        return Quant.ExAy(fun, gx - {word})
 
     def AxEy(fun, gx):
         if len(gx) == 0: return False
         word = gx.pop()
-        if Quant.Ax((lambda t: fun(t,word)), gx | {word}): return True
-        else: return Quant.AxEy(fun,gx)
+        gx.add(word)
+        if Quant.Ax((lambda t: fun(t,word)), gx): return True
+        return Quant.AxEy(fun, gx - {word})
 
     def AxAy(fun, gx):
         if len(gx) == 0: return True
         word = gx.pop()
-        if Quant.Ax((lambda t: fun(t,word)), gx | {word}): return False
-        else: return Quant.AxAy(fun,gx)
+        gx.add(word)
+        if Quant.Ax((lambda t: fun(t,word)), gx): return False
+        return Quant.AxAy(fun, gx - {word})
 
 
 
@@ -192,17 +200,23 @@ def parseForNot(q):
     assert q in Quant.__dict__
     return q
 
-quan = parseForNot(input("    quantifier: ")) # raw input of quantifier
+def loop():
+    print()
+    quantifier_input = input("*"*31+"\n\n    quantifier: ") # raw input of quantifier
+    if quantifier_input:
+        print()
+        quan = parseForNot(quantifier_input) 
 
-cnt = quan.count("A") + quan.count("E")
+        cnt = quan.count("A") + quan.count("E")
 
-lambstring = "lambda x" + ("" if cnt < 2 else ", y") + ": " # developing the head of a lambda to be eval'ed later
-funstring = input("type the function: " + dis(quan) + " ") # the raw function
-inpfun = eval(lambstring + "bool(" + funstring + ")")
-finalfun = lambda setalgo: Quant.__dict__[quan](inpfun, setalgo)
-print()
-print(disp(quan) + "(" + funstring + ")" * cnt)
-print()
-for i,j in enumerate(models):
-    print("   M{}: {}".format(i+1,finalfun(j)))
-print()
+        lambstring = "lambda x" + ("" if cnt < 2 else ", y") + ": " # developing the head of a lambda to be eval'ed later
+        funstring = input("    function: " + dis(quan) + " ") # the raw function
+        inpfun = eval(lambstring + "bool(" + funstring + ")")
+        finalfun = lambda setalgo: Quant.__dict__[quan](inpfun, setalgo)
+        print()
+        print(disp(quan) + "(" + funstring + ")" * cnt)
+        print()
+        for i,j in enumerate(models): print("   M{}: {}\t{}".format(i+1, finalfun(set(j)), j))
+        loop()
+
+if __name__ == '__main__': loop()
