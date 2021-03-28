@@ -1,6 +1,11 @@
 from PIL import Image
 
-imgStr = '/Users/jacksonsherman/Downloads/montero.png'# input("filepath to the png: ")
+def reflect(ima, xaxis=False, yaxis=False):
+    assert isinstance(ima, Image)
+    im = Image.new("RGBA", ima.getBBox()[2:])
+    
+
+imgStr = '/Users/jacksonsherman/Downloads/lil-nas-x-7-ep.png' # '/Users/jacksonsherman/Downloads/montero.png'# input("filepath to the png: ")
 
 width  = 8 # int(input("tile horizontally: "))
 height = 5 # int(input("  tile vertically: "))

@@ -23,9 +23,13 @@ class Logic:
         return Logic(bool(self) or bool(other))
     
     def __add__(self, other):
+        if isinstance(other, str):
+            return str(self) + other
         return self | other
     
     def __radd__(self, other):
+        if isinstance(other, str):
+            return other + str(self)
         return self + other
 
     def __xor__(self, other):
@@ -93,3 +97,6 @@ class Formatted:
         stack = []
         for i, char in enumerate(self.string):
             pass
+
+if __name__=='__main__':
+    print(Logic.TRUE)
