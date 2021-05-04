@@ -15,36 +15,24 @@ def collect():
 print()
 
 models = (
-    ('proof', 'valid', 'bug', 'set'),
-    ('proof', 'valid', 'logic', 'set', 'not'),
-    ('proof', 'valid', 'logic', 'pun', 'not'),
-    ('proof', 'valid', 'logic', 'set', 'program'),
-    ('proof', 'valid', 'logic', 'not', 'program'),
-    ('proof', 'logic', 'not', 'program'),
+    (1,3,4,6),
+    (2,4,5,7),
+    (1,2,3,4),
+    (2,3,4,5),
+    (1,2,3,4,5),
 )
 fullset = set()
 for row in models:
     fullset |= set(row)
 
+def o(n):
+    return Logic(int(n)%2==1)
 
-def prep(s):
-    assert isinstance(s,str)
-    return s.lower()
+def e(n):
+    return Logic(int(n)%2==0)
 
-def r(s):
-    return Logic(prep(s)[0] == "r")
-
-def t(s):
-    return Logic(prep(s)[0] == "t")
-
-def f(s):
-    return Logic(len(prep(s)) == 5)
-
-def l(x,y):
-    return Logic(len(prep(x)) > len(prep(y)))
-
-def s(x,y):
-    return Logic(False) if not x else (Logic(True) if x[0] in y else s(x[1:], y))
+def b(x,y):
+    return Logic(x > y)
 
 # def drawing(fun,mods,two=True):
 #     vals = ((),())
