@@ -1,0 +1,91 @@
+
+=======
+=  1  =
+=======
+
+Day 0:
+      Leave home at noon ish / in the evening
+      5:48 drive to Pittsburgh's Kennywood
+Day 1:
+    - Kennywood
+      1:47 drive to Altoona's Lakemont
+Day 2:
+    - Lakemont
+      2:05 drive to Elysburg's Knoebles
+    - Knoebles
+Day 3:
+      1:36 drive to Allentown's Dorney Park
+    - Dorney Park
+      1:02 drive to Philadelphia for sleep
+Day 4:
+      0:58 drive to Jackson NJ's Six Flags Great Adventure
+    - Six Flags Great Adventure
+      0:58 drive to Philadelphia for sleep
+Day 5:
+      1:40 drive to Hershey's Hersheypark
+    - Hersheypark
+Day 6:
+      4:34 drive to Conneaut's Conneaut Lake Park
+    - Conneaut Lake (1 or 2 rides. Carnival style pay per ride)
+      0:50 drive to Erie's Waldameer
+    - Waldameer
+Day 7:
+      2:35 drive to Sandusky OH's Cedar Point
+    - Cedar Point
+
+option 1:
+    Day 8:
+          4:06 drive home
+option 2:
+    Day 8:
+        - Cedar Point
+    Day 9:
+          4:06 drive home
+
+=======
+=  2  =
+=======
+
+Day 0:
+      Leave home at noon ish / in the evening
+      5:48 drive to Pittsburgh's Kennywood
+Day 1:
+    - Kennywood
+Day 2:
+      3:43 drive to Elysburg's Knoebles
+    - Knoebles
+Day 3:
+      1:36 drive to Allentown's Dorney Park
+    - Dorney Park
+      1:02 drive to Philadelphia for sleep
+Day 4:
+      0:58 drive to Jackson NJ's Six Flags Great Adventure
+    - Six Flags Great Adventure
+      0:58 drive to Philadelphia for sleep
+Day 5:
+      1:40 drive to Hershey's Hersheypark
+    - Hersheypark
+Day 6:
+      2:21 drive to Altoona's Lakemont Park
+    - Lakemont
+      2:55 drive to Conneaut's Conneaut Lake Park
+    - Conneaut Lake
+Day 7:
+      0:50 drive to Erie's Waldameer
+    - Waldameer
+      2:35 drive to Sandusky OH's Cedar Point
+Day 8:
+    - Cedar Point
+
+option 1:
+    Day 9:
+          4:06 drive home
+option 2:
+    Day 9:
+        - Cedar Point
+    Day 10:
+          4:06 drive home
+
+
+
+

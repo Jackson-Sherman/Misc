@@ -1,0 +1,344 @@
+{
+    "Conneaut Lake": {
+        "Conneaut Lake": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Dorney": {
+            "distance": 540631,
+            "duration": 18656
+        },
+        "Great Adventure": {
+            "distance": 681257,
+            "duration": 23456
+        },
+        "Hersheypark": {
+            "distance": 449476,
+            "duration": 16469
+        },
+        "Indy": {
+            "distance": 632550,
+            "duration": 21947
+        },
+        "Kennywood": {
+            "distance": 168122,
+            "duration": 6359
+        },
+        "Knoebels": {
+            "distance": 409534,
+            "duration": 14381
+        },
+        "Lakemont": {
+            "distance": 267270,
+            "duration": 10543
+        },
+        "Waldameer": {
+            "distance": 71128,
+            "duration": 3004
+        }
+    },
+    "Dorney": {
+        "Conneaut Lake": {
+            "distance": 538082,
+            "duration": 18671
+        },
+        "Dorney": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Great Adventure": {
+            "distance": 152391,
+            "duration": 5732
+        },
+        "Hersheypark": {
+            "distance": 113125,
+            "duration": 4496
+        },
+        "Indy": {
+            "distance": 995254,
+            "duration": 34506
+        },
+        "Kennywood": {
+            "distance": 429600,
+            "duration": 15959
+        },
+        "Knoebels": {
+            "distance": 118190,
+            "duration": 5787
+        },
+        "Lakemont": {
+            "distance": 328479,
+            "duration": 11661
+        },
+        "Waldameer": {
+            "distance": 591066,
+            "duration": 20246
+        }
+    },
+    "Great Adventure": {
+        "Conneaut Lake": {
+            "distance": 678955,
+            "duration": 23249
+        },
+        "Dorney": {
+            "distance": 153295,
+            "duration": 5576
+        },
+        "Great Adventure": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Hersheypark": {
+            "distance": 222601,
+            "duration": 8310
+        },
+        "Indy": {
+            "distance": 1103763,
+            "duration": 37725
+        },
+        "Kennywood": {
+            "distance": 538109,
+            "duration": 19178
+        },
+        "Knoebels": {
+            "distance": 261129,
+            "duration": 10684
+        },
+        "Lakemont": {
+            "distance": 443920,
+            "duration": 15229
+        },
+        "Waldameer": {
+            "distance": 731939,
+            "duration": 24825
+        }
+    },
+    "Hersheypark": {
+        "Conneaut Lake": {
+            "distance": 443116,
+            "duration": 16432
+        },
+        "Dorney": {
+            "distance": 116479,
+            "duration": 4629
+        },
+        "Great Adventure": {
+            "distance": 221789,
+            "duration": 8348
+        },
+        "Hersheypark": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Indy": {
+            "distance": 892432,
+            "duration": 31002
+        },
+        "Kennywood": {
+            "distance": 326778,
+            "duration": 12455
+        },
+        "Knoebels": {
+            "distance": 107327,
+            "duration": 4619
+        },
+        "Lakemont": {
+            "distance": 230879,
+            "duration": 8469
+        },
+        "Waldameer": {
+            "distance": 496100,
+            "duration": 18007
+        }
+    },
+    "Indy": {
+        "Conneaut Lake": {
+            "distance": 635688,
+            "duration": 22163
+        },
+        "Dorney": {
+            "distance": 998903,
+            "duration": 34810
+        },
+        "Great Adventure": {
+            "distance": 1106479,
+            "duration": 38027
+        },
+        "Hersheypark": {
+            "distance": 895539,
+            "duration": 31153
+        },
+        "Indy": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Kennywood": {
+            "distance": 596347,
+            "duration": 20882
+        },
+        "Knoebels": {
+            "distance": 953131,
+            "duration": 32289
+        },
+        "Lakemont": {
+            "distance": 737450,
+            "duration": 25993
+        },
+        "Waldameer": {
+            "distance": 660200,
+            "duration": 22443
+        }
+    },
+    "Kennywood": {
+        "Conneaut Lake": {
+            "distance": 167348,
+            "duration": 6338
+        },
+        "Dorney": {
+            "distance": 430767,
+            "duration": 16081
+        },
+        "Great Adventure": {
+            "distance": 538342,
+            "duration": 19298
+        },
+        "Hersheypark": {
+            "distance": 327402,
+            "duration": 12424
+        },
+        "Indy": {
+            "distance": 595099,
+            "duration": 20785
+        },
+        "Kennywood": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Knoebels": {
+            "distance": 358135,
+            "duration": 13646
+        },
+        "Lakemont": {
+            "distance": 148465,
+            "duration": 6441
+        },
+        "Waldameer": {
+            "distance": 220332,
+            "duration": 7913
+        }
+    },
+    "Knoebels": {
+        "Conneaut Lake": {
+            "distance": 408962,
+            "duration": 14355
+        },
+        "Dorney": {
+            "distance": 118427,
+            "duration": 5781
+        },
+        "Great Adventure": {
+            "distance": 261818,
+            "duration": 10762
+        },
+        "Hersheypark": {
+            "distance": 103488,
+            "duration": 4359
+        },
+        "Indy": {
+            "distance": 950614,
+            "duration": 32094
+        },
+        "Kennywood": {
+            "distance": 358317,
+            "duration": 13805
+        },
+        "Knoebels": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Lakemont": {
+            "distance": 213952,
+            "duration": 7628
+        },
+        "Waldameer": {
+            "distance": 461946,
+            "duration": 15930
+        }
+    },
+    "Lakemont": {
+        "Conneaut Lake": {
+            "distance": 267417,
+            "duration": 10605
+        },
+        "Dorney": {
+            "distance": 327815,
+            "duration": 11715
+        },
+        "Great Adventure": {
+            "distance": 444776,
+            "duration": 15369
+        },
+        "Hersheypark": {
+            "distance": 229846,
+            "duration": 8449
+        },
+        "Indy": {
+            "distance": 734479,
+            "duration": 25920
+        },
+        "Kennywood": {
+            "distance": 147726,
+            "duration": 6536
+        },
+        "Knoebels": {
+            "distance": 212250,
+            "duration": 7527
+        },
+        "Lakemont": {
+            "distance": 0,
+            "duration": 0
+        },
+        "Waldameer": {
+            "distance": 320402,
+            "duration": 12181
+        }
+    },
+    "Waldameer": {
+        "Conneaut Lake": {
+            "distance": 70354,
+            "duration": 2978
+        },
+        "Dorney": {
+            "distance": 593037,
+            "duration": 20193
+        },
+        "Great Adventure": {
+            "distance": 733663,
+            "duration": 24992
+        },
+        "Hersheypark": {
+            "distance": 501882,
+            "duration": 18006
+        },
+        "Indy": {
+            "distance": 656992,
+            "duration": 22258
+        },
+        "Kennywood": {
+            "distance": 220528,
+            "duration": 7896
+        },
+        "Knoebels": {
+            "distance": 461940,
+            "duration": 15918
+        },
+        "Lakemont": {
+            "distance": 319676,
+            "duration": 12079
+        },
+        "Waldameer": {
+            "distance": 0,
+            "duration": 0
+        }
+    }
+}
